@@ -36,7 +36,7 @@ app.post("/api/cats", (req, res) => {
     console.log(req.query);
 
     if (req.query.cat && req.query.in) {
-        io.emit('cat movement', {name: req.query.cat, in: (req.query.in === "true" ? true : false)});
+        io.emit('cat movement', {name: req.query.cat, in: (req.query.in === "true")});
         res.sendStatus(200);
     } else {
         res.sendStatus(500);
@@ -45,7 +45,7 @@ app.post("/api/cats", (req, res) => {
 
 })
 
-io.on('connection', (socket) => {
+io.on('connection', () => {
     console.log("A user connected");
     io.emit('cat state', catState);
 })
